@@ -46,6 +46,33 @@ float fbm(vec2 p) {
   return v;
 }
 
+// 疎な格子に1つずつ星を置き、明滅させる(銀河の星屑レイヤー)
+float starLayer(vec2 uv, float density, float speed, float seed) {
+  vec2 g = uv * density;
+  vec2 id = floor(g);
+  vec2 f = fract(g) - 0.5;
+
+  float h = hash(id + seed);
+  float present = step(0.9, h);
+  vec2 jitter = (vec2(hash(id + seed + 12.3), hash(id + seed + 45.6)) - 0.5) * 0.8;
+  float d = length(f - jitter);
+  float size = mix(0.02, 0.08, hash(id + seed + 78.9));
+  float core = smoothstep(size, 0.0, d);
+
+  float phase = h * 62.83185;
+  float twinkle = 0.3 + 0.7 * (0.5 + 0.5 * sin(u_time * speed + phase));
+  return present * core * twinkle;
+}
+
+// 十字にきらめく大粒のスパークル(ヒーローのアクセント)
+float sparkleGlint(vec2 d, float size) {
+  float r2 = dot(d, d);
+  float core = exp(-r2 / (size * size * 0.12));
+  float beamX = exp(-(d.y * d.y) / (size * size * 0.01)) * exp(-abs(d.x) / size);
+  float beamY = exp(-(d.x * d.x) / (size * size * 0.01)) * exp(-abs(d.y) / size);
+  return core + 0.55 * (beamX + beamY);
+}
+
 void main() {
   vec2 uv = (gl_FragCoord.xy - 0.5 * u_res) / min(u_res.x, u_res.y);
   float t = u_time * 0.055;
@@ -74,6 +101,28 @@ void main() {
 
   float vig = smoothstep(1.45, 0.3, length(uv));
   col *= mix(0.72, 1.0, vig);
+
+  // 銀河の星屑: 雲より奥にあるように、視差を弱めに追従させる
+  vec2 starUv = uv + 0.06 * (u_pointer - 0.5);
+  float stars = 0.0;
+  stars += starLayer(starUv, 9.0, 1.6, 3.1) * 0.85;
+  stars += starLayer(starUv + 3.7, 14.0, 2.3, 19.4) * 0.6;
+  stars += starLayer(starUv * 1.3 + 8.2, 22.0, 3.1, 51.0) * 0.4;
+  vec3 starColor = vec3(0.804, 0.839, 0.957);
+  col += stars * starColor;
+
+  // 数個の大粒スパークル(緩やかに明滅するアクセント)
+  vec3 glintColor = vec3(0.976, 0.886, 0.686);
+  for (int i = 0; i < 3; i++) {
+    float fi = float(i);
+    vec2 gp = (vec2(hash(vec2(fi, 1.0)), hash(vec2(fi, 2.0))) * 2.0 - 1.0) * 0.85;
+    gp += 0.05 * (u_pointer - 0.5);
+    float envPhase = hash(vec2(fi, 3.0)) * 6.2832;
+    float env = pow(max(0.0, sin(u_time * 0.35 + envPhase)), 3.0);
+    float size = mix(0.045, 0.075, hash(vec2(fi, 4.0)));
+    col += sparkleGlint(starUv - gp, size) * env * glintColor;
+  }
+
   col += (hash(gl_FragCoord.xy + fract(u_time)) - 0.5) * 0.018;
 
   gl_FragColor = vec4(col, 1.0);
