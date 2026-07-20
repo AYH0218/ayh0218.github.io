@@ -39,7 +39,7 @@ export const profile = {
   alias: "AYH0218",
   title: "iOS & Web Engineer",
   catchphrase: "アイデアを、手ざわりのあるプロダクトに。",
-  lead: "Webアプリ・業務システムからiOSアプリまで、要件整理から実装・リリース・運用までを一貫して手がけるエンジニアです。個人開発では5本のiOSアプリを企画からApp Store公開まで完走しています。",
+  lead: "Webアプリ・業務システムからiOSアプリまで、要件整理から実装・リリース・運用までを一貫して手がけるエンジニアです。個人開発では企画からApp Store公開までを一人で担い、5本のiOSアプリをリリースしています。",
   location: "Japan",
   contactFormUrl: "https://forms.gle/quW3SwSGB1Ezv3cR7",
 } as const;
@@ -47,7 +47,7 @@ export const profile = {
 /** Aboutセクションの段落 */
 export const about: string[] = [
   "ネットワークエンジニアとしてキャリアを始め、ECサイトの運用・Web制作を経てフロントエンド開発へ。現在はWebアプリケーション・業務システム・iOSアプリの開発と保守運用に携わっています。",
-  "フロントエンドを軸に、バックエンド・AWS・iOSまで必要な技術を自走でキャッチアップできることが強みです。業務と並行して個人開発にも取り組み、企画からデザイン、実装、LP制作、App Store公開までを一人で完走したiOSアプリを5本リリースしました。Claude CodeやCodex CLIなどのAIツールも開発フローに取り入れ、調査・実装・ドキュメント整備を効率化しています。",
+  "フロントエンドを軸に、バックエンド・AWS・iOSまで必要な技術を自走でキャッチアップできることが強みです。業務と並行して個人開発にも取り組み、企画からデザイン、実装、LP制作、App Store公開までをすべて一人で担ったiOSアプリを5本リリースしました。Claude CodeやCodex CLIなどのAIツールも開発フローに取り入れ、調査・実装・ドキュメント整備を効率化しています。",
 ];
 
 export const apps: AppWork[] = [
