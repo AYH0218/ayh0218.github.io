@@ -1,0 +1,61 @@
+---
+import { profile } from "../data/profile";
+---
+
+<section id="top" class="relative flex min-h-svh items-center overflow-hidden">
+  <!-- WebGL失敗時に見えるCSSフォールバック -->
+  <div
+    class="absolute inset-0"
+    style="background:
+      radial-gradient(60% 80% at 70% 20%, rgb(137 220 235 / 0.18), transparent 60%),
+      radial-gradient(50% 70% at 20% 80%, rgb(203 166 247 / 0.2), transparent 60%),
+      #1e1e2e;"
+  >
+  </div>
+  <canvas id="hero-canvas" class="absolute inset-0 h-full w-full"></canvas>
+  <div
+    class="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-base"
+  >
+  </div>
+
+  <div class="section-shell relative z-10 pt-14">
+    <p class="font-mono text-sm text-accent">{profile.title}</p>
+    <h1 class="mt-4 text-5xl font-extrabold tracking-tight sm:text-7xl">
+      {profile.name}
+    </h1>
+    <p class="mt-5 max-w-xl text-2xl font-bold sm:text-3xl">
+      <span class="text-gradient">{profile.catchphrase}</span>
+    </p>
+    <p class="mt-6 max-w-xl leading-relaxed text-muted">{profile.lead}</p>
+    <div class="mt-10 flex flex-wrap gap-4">
+      <a
+        href="#works"
+        class="rounded-full bg-ink px-6 py-3 text-sm font-bold text-base transition-opacity hover:opacity-80"
+      >
+        アプリを見る
+      </a>
+      <a
+        href="#contact"
+        class="rounded-full border border-line px-6 py-3 text-sm font-bold text-ink transition-colors hover:border-accent hover:text-accent"
+      >
+        連絡する
+      </a>
+    </div>
+  </div>
+
+  <div
+    class="absolute bottom-6 left-1/2 z-10 -translate-x-1/2 font-mono text-xs tracking-widest text-muted"
+    aria-hidden="true"
+  >
+    SCROLL ↓
+  </div>
+</section>
+
+<script>
+  import { mountFluidHero } from "../scripts/fluid-hero";
+
+  const canvas = document.getElementById("hero-canvas");
+  if (canvas instanceof HTMLCanvasElement && !mountFluidHero(canvas)) {
+    canvas.remove();
+  }
+</script>

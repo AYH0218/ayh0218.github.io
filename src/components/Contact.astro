@@ -1,0 +1,50 @@
+---
+import { profile, links } from "../data/profile";
+---
+
+<section id="contact" class="section-shell py-24 sm:py-32">
+  <div class="card reveal relative overflow-hidden p-10 text-center sm:p-16">
+    <div
+      class="pointer-events-none absolute inset-0"
+      style="background:
+        radial-gradient(50% 80% at 80% 0%, rgb(137 220 235 / 0.12), transparent 60%),
+        radial-gradient(50% 80% at 10% 100%, rgb(203 166 247 / 0.14), transparent 60%);"
+      aria-hidden="true"
+    >
+    </div>
+    <div class="relative">
+      <p class="font-mono text-sm tracking-widest text-accent">05 — CONTACT</p>
+      <h2 class="mt-4 text-3xl font-extrabold tracking-tight sm:text-4xl">
+        お気軽にご連絡ください
+      </h2>
+      <p class="mx-auto mt-4 max-w-md leading-relaxed text-muted">
+        お仕事のご相談・カジュアル面談など、下のフォームからお気軽にご連絡ください。
+      </p>
+      <a
+        href={profile.contactFormUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="mt-8 inline-block rounded-full bg-ink px-8 py-3.5 text-sm font-bold text-base transition-opacity hover:opacity-80"
+      >
+        お問い合わせフォーム ↗
+      </a>
+      <ul class="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm">
+        {
+          links.map((link) => (
+            <li>
+              <a
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="font-medium text-muted transition-colors hover:text-ink"
+                title={link.note}
+              >
+                {link.label} ↗
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</section>

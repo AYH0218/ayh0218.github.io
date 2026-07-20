@@ -1,0 +1,31 @@
+---
+import { profile } from "../data/profile";
+
+const nav = [
+  { href: "#works", label: "Works" },
+  { href: "#skills", label: "Skills" },
+  { href: "#career", label: "Career" },
+  { href: "#about", label: "About" },
+  { href: "#contact", label: "Contact" },
+];
+---
+
+<header class="fixed inset-x-0 top-0 z-50 border-b border-line bg-base/70 backdrop-blur-md">
+  <div class="section-shell flex h-14 items-center justify-between">
+    <a href="#top" class="font-mono text-sm font-medium tracking-widest text-ink">
+      {profile.alias}
+    </a>
+    <nav class="flex items-center gap-3 sm:gap-7">
+      {
+        nav.map((item) => (
+          <a
+            href={item.href}
+            class="text-[11px] font-medium text-muted transition-colors hover:text-ink sm:text-sm"
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+  </div>
+</header>

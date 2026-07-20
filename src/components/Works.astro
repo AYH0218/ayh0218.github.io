@@ -1,0 +1,72 @@
+---
+import Section from "./Section.astro";
+import { apps } from "../data/profile";
+---
+
+<Section id="works" kicker="01 — WORKS" title="iOSアプリ & LP">
+  <p class="reveal -mt-6 mb-10 max-w-2xl leading-relaxed text-muted">
+    直近で個人開発・リリースしたiOSアプリです。企画からデザイン、実装、LP制作、ストア申請まで一貫して担当しています。
+  </p>
+  <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+    {
+      apps.map((app) => (
+        <article class="card reveal flex flex-col p-6 transition-colors hover:border-accent/40">
+          <div class="flex items-center gap-4">
+            {app.icon ? (
+              <img
+                src={app.icon}
+                alt={`${app.name}のアイコン`}
+                class="size-12 rounded-xl object-cover"
+                loading="lazy"
+                width="48"
+                height="48"
+              />
+            ) : (
+              <div
+                class="flex size-12 shrink-0 items-center justify-center rounded-xl text-lg font-extrabold text-base"
+                style={`background: ${app.accent};`}
+                aria-hidden="true"
+              >
+                {app.name.charAt(0)}
+              </div>
+            )}
+            <div>
+              <h3 class="text-lg font-bold">{app.name}</h3>
+              <p class="text-sm text-muted">{app.tagline}</p>
+            </div>
+          </div>
+          <p class="mt-4 flex-1 text-sm leading-relaxed text-muted">{app.description}</p>
+          <ul class="mt-4 flex flex-wrap gap-2">
+            {app.tech.map((t) => (
+              <li class="rounded-full border border-line px-2.5 py-1 font-mono text-xs text-muted">
+                {t}
+              </li>
+            ))}
+          </ul>
+          <div class="mt-5 flex gap-4 border-t border-line pt-4 text-sm font-medium">
+            {app.appStoreUrl && (
+              <a
+                href={app.appStoreUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-accent transition-opacity hover:opacity-70"
+              >
+                App Store ↗
+              </a>
+            )}
+            {app.web && (
+              <a
+                href={app.web.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-violet transition-opacity hover:opacity-70"
+              >
+                {app.web.label} ↗
+              </a>
+            )}
+          </div>
+        </article>
+      ))
+    }
+  </div>
+</Section>

@@ -1,0 +1,23 @@
+---
+import Section from "./Section.astro";
+import { skills } from "../data/profile";
+---
+
+<Section id="skills" kicker="02 — SKILLS" title="スキル">
+  <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+    {
+      skills.map((category) => (
+        <div class="card reveal p-6">
+          <h3 class="font-bold">{category.title}</h3>
+          <ul class="mt-4 flex flex-wrap gap-2">
+            {category.items.map((item) => (
+              <li class="rounded-full border border-line bg-surface px-3 py-1.5 text-sm text-ink/90">
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))
+    }
+  </div>
+</Section>

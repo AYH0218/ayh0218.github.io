@@ -1,0 +1,25 @@
+---
+import Section from "./Section.astro";
+import { career } from "../data/profile";
+---
+
+<Section id="career" kicker="03 — CAREER" title="経歴">
+  <ol class="relative max-w-2xl space-y-12 border-l border-line pl-8">
+    {
+      career.map((item) => (
+        <li class="reveal relative">
+          <span
+            class="absolute top-1.5 -left-[2.32rem] size-2.5 rounded-full bg-accent"
+            aria-hidden="true"
+          />
+          <p class="font-mono text-sm text-muted">{item.period}</p>
+          <h3 class="mt-2 text-lg font-bold">
+            {item.role}
+            {item.org && <span class="ml-2 font-medium text-muted">/ {item.org}</span>}
+          </h3>
+          <p class="mt-2 leading-relaxed text-muted">{item.description}</p>
+        </li>
+      ))
+    }
+  </ol>
+</Section>

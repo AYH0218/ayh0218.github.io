@@ -1,0 +1,37 @@
+---
+import Section from "./Section.astro";
+import { profile, about } from "../data/profile";
+---
+
+<Section id="about" kicker="04 — ABOUT" title="プロフィール">
+  <div class="reveal max-w-2xl space-y-5 leading-relaxed text-muted">
+    {about.map((paragraph) => <p>{paragraph}</p>)}
+  </div>
+  <dl class="reveal mt-10 grid max-w-2xl grid-cols-2 gap-6 sm:grid-cols-4">
+    <div>
+      <dt class="font-mono text-xs tracking-widest text-muted">LOCATION</dt>
+      <dd class="mt-1 font-medium">{profile.location}</dd>
+    </div>
+    <div>
+      <dt class="font-mono text-xs tracking-widest text-muted">FOCUS</dt>
+      <dd class="mt-1 font-medium">iOS / Web</dd>
+    </div>
+    <div>
+      <dt class="font-mono text-xs tracking-widest text-muted">ENGLISH</dt>
+      <dd class="mt-1 font-medium">日常会話レベル</dd>
+    </div>
+    <div>
+      <dt class="font-mono text-xs tracking-widest text-muted">GITHUB</dt>
+      <dd class="mt-1 font-medium">
+        <a
+          href="https://github.com/AYH0218"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="transition-colors hover:text-accent"
+        >
+          @{profile.alias}
+        </a>
+      </dd>
+    </div>
+  </dl>
+</Section>

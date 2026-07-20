@@ -20,5 +20,8 @@ pnpm-debug.log*
 # macOS-specific files
 .DS_Store
 
+# 職務経歴書などの機密ドキュメント(コミット禁止)
+doc/
+
 # jetbrains setting folder
 .idea/
