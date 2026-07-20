@@ -23,8 +23,13 @@ import { profile } from "../data/profile";
     <h1 class="mt-4 text-5xl font-extrabold tracking-tight sm:text-7xl">
       {profile.name}
     </h1>
-    <p class="mt-5 max-w-xl text-2xl font-bold sm:text-3xl">
-      <span class="text-gradient">{profile.catchphrase}</span>
+    <p class="mt-5 max-w-2xl text-2xl font-bold sm:text-3xl">
+      {
+        // 読点の直後でのみ折り返しを許可し、「に。」だけの孤立改行を防ぐ
+        profile.catchphrase
+          .split(/(?<=、)/)
+          .map((part) => <span class="text-gradient inline-block">{part}</span>)
+      }
     </p>
     <p class="mt-6 max-w-xl leading-relaxed text-muted">{profile.lead}</p>
     <div class="mt-10 flex flex-wrap gap-4">
